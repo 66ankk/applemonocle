@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $image_path=selectBackground();
         }   
         else {
-            $image_path="./assets/img/base.jpg";
+            $image_path="assets/img/base.jpg";
         }
         list($img_width, $img_height) = getimagesize($image_path);
         
@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         //set text size based on width
         do {
             $font_size++;
-            $p = imagettfbbox($font_size,0,'./assets/fonts/impact.ttf',$txt);
+            $p = imagettfbbox($font_size,0,'assets/fonts/impact.ttf',$txt);
             $txt_width=$p[2]-$p[0];
         } while ($txt_width <= $txt_max_width);
         
         //decrease if too tall to max height threshold
         do {
             $font_size--;
-            $p = imagettfbbox($font_size,0,'./assets/fonts/impact.ttf',$txt);
+            $p = imagettfbbox($font_size,0,'assets/fonts/impact.ttf',$txt);
             $txt_width=$p[2]-$p[0];
             $txt_height=$p[1]-$p[7];
         } while ($txt_height >= $txt_max_height);
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if(isset($_GET['blur'])){
             $jpg_image=blurImage($jpg_image);
         }
-        imagettftext($jpg_image, $font_size, 0, $x, $y, $textcolor, './assets/fonts/impact.ttf', $txt);//create image into variable
+        imagettftext($jpg_image, $font_size, 0, $x, $y, $textcolor, 'assets/fonts/impact.ttf', $txt);//create image into variable
         //end customize!
         
         header('Content-type: image/jpeg');
@@ -69,7 +69,7 @@ function randomize($str){
     return implode('', $str);
 }
 function selectBackground(){
-    $files = glob('./assets/img/*.*');
+    $files = glob('assets/img/*.*');
     $file = array_rand($files);
     return $files[$file];
 }
